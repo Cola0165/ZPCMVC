@@ -1,0 +1,28 @@
+﻿@model ZPCMVC.Models.Poetry
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+</style>
+<h2>@Html.DisplayFor(model => model.Location)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal text-center">
+        <dd>
+            <b>@Html.DisplayFor(model => model.Name)</b>
+        </dd>
+
+        <dd>
+            【@Html.DisplayFor(model => model.Dynasty)】@Html.DisplayFor(model => model.Poet)
+        </dd>
+        <dd >
+             @Html.Raw(Model.Cont.Replace("\n", "<br />"))
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
