@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "音乐欣赏";
+}
+<h2>经典咏流传</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="text-center">
+    <hr />
+    <div>
+        <audio src="~/images/陈彼得 - 青玉案·元夕.mp3" controls></audio>
+        <p>
+            <b>@Html.ActionLink("青玉案·元夕", "Details", new { id = 36 },new { @target="_blank"})</b>
+        </p>
+        <p>
+            【宋】辛弃疾
+        </p>
+        <p>
+            东风夜放花千树。更吹落、星如雨。宝马雕车香满路。凤箫声动，玉壶光转，一夜鱼龙舞。<br />
+            蛾儿雪柳黄金缕。笑语盈盈暗香去。众里寻他千百度。蓦然回首，那人却在，灯火阑珊处。
+        </p>
+    </div>
+    <hr />
+    <div>
+        <audio src="~/images/刘恺威 - 咏柳.mp3" controls></audio>
+        <p>
+            <b>@Html.ActionLink("咏柳", "Details", new { id = 2 }, new { @target = "_blank" })</b>
+        </p>
+        <p>
+            【唐】贺知章
+        </p>
+        <p>
+            碧玉妆成一树高，万条垂下绿丝绦。<br />
+            不知细叶谁裁出，二月春风似剪刀。
+        </p>
+    </div>
+    <hr />
+    <div>
+        <audio src="~/images/盛一伦 - 梦西湖.mp3" controls></audio>
+        <p>
+            <b>@Html.ActionLink("钱塘湖春行", "Details", new { id = 9 }, new { @target = "_blank" })</b>
+        </p>
+        <p>
+            【唐】白居易
+        </p>
+        <p>
+            孤山寺北贾亭西，水面初平云脚低。<br />
+            几处早莺争暖树，谁家新燕啄春泥。<br />
+            乱花渐欲迷人眼，浅草才能没马蹄。<br />
+            最爱湖东行不足，绿杨阴里白沙堤。
+        </p>
+        <p>
+            <b>@Html.ActionLink("饮湖上初晴后雨", "Details", new { id = 21 }, new { @target = "_blank" })</b>
+        </p>
+        <p>
+            【宋】苏轼
+        </p>
+        <p>
+            水光潋滟晴方好，山色空蒙雨亦奇。<br />
+            欲把西湖比西子，淡妆浓抹总相宜。
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    var audios = document.getElementsByTagName("audio");
+    function pauseAll() {
+        var self = this;
+        [].forEach.call(audios, function (i) {
+            i !== self && i.pause();
+        })
+    }
+    [].forEach.call(audios, function (i) {
+        i.addEventListener("play", pauseAll.bind(i));
+    })
+</script>

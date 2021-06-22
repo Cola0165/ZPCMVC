@@ -1,28 +1,35 @@
 ﻿@model ZPCMVC.Models.Poetry
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = @Html.DisplayFor(model => model.Name);
 }
-<style>
-</style>
-<h2>@Html.DisplayFor(model => model.Location)</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal text-center">
-        <dd>
-            <b>@Html.DisplayFor(model => model.Name)</b>
-        </dd>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
 
-        <dd>
-            【@Html.DisplayFor(model => model.Dynasty)】@Html.DisplayFor(model => model.Poet)
-        </dd>
-        <dd >
-             @Html.Raw(Model.Cont.Replace("\n", "<br />"))
-        </dd>
-    </dl>
+<hr />
+<div class="text-center" style="font-size:large;">
+    <p>
+        <b>@Html.DisplayFor(model => model.Name)</b>
+    </p>
+
+    <p>
+        【@Html.DisplayFor(model => model.Dynasty)】@Html.DisplayFor(model => model.Poet)
+    </p>
+    <p style="font-size:x-large">
+        @Html.Raw(Model.Cont.Replace("\n", "<br />"))
+    </p>
 </div>
+
+@{ if (ViewBag.Last != null)
+    {
+        <button type="button" class="btn btn-default">@Html.ActionLink("上一篇", "Details", new { id = Model.Id - 1 }, new { @title = ViewBag.Last })</button>
+    }
+    if (ViewBag.Next != null)
+    {
+        <button type="button" class="btn btn-default">@Html.ActionLink("下一篇", "Details", new { id = Model.Id + 1 }, new { @title = ViewBag.Next })</button>
+    }
+}
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="#" onclick="javascript: history.back(-1);">返回</a>
 </p>

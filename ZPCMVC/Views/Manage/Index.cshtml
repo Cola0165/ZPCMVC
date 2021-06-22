@@ -1,33 +1,31 @@
 ﻿@model ZPCMVC.Models.IndexViewModel
 @{
-    ViewBag.Title = "管理";
+    ViewBag.Title = "账户设置";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>更改你的帐户设置</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>密码:</dt>
         <dd>
-            [
+            
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("更改密码", "ChangePassword")
+                @Html.ActionLink("修改密码", "ChangePassword")
             }
             else
             {
-                @Html.ActionLink("创建", "SetPassword")
+                @Html.ActionLink("设置密码", "SetPassword")
             }
-            ]
+            
         </dd>
-        <dt>外部登录名:</dt>
+        @*<dt>外部登录名:</dt>
         <dd>
             @Model.Logins.Count [
             @Html.ActionLink("管理", "ManageLogins") ]
-        </dd>
+        </dd>*@
         @*
             电话号码可以用作双因素身份验证系统中的第二个验证因素。
              
@@ -56,12 +54,12 @@
                 }
             </dd>
         *@
-        <dt>双重身份验证:</dt>
+        @*<dt>双重身份验证:</dt>
         <dd>
             <p>
                 未配置双因素身份验证提供程序。请参阅<a href="https://go.microsoft.com/fwlink/?LinkId=403804">此文章</a>
                 详细了解如何设置此 ASP.NET 应用程序以支持双因素身份验证。
-            </p>
+            </p>*@
             @*@if (Model.TwoFactor)
                 {
                     using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

@@ -1,25 +1,19 @@
 ﻿@model IEnumerable<ZPCMVC.Models.Poetry>
-
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-    @Html.ActionLink("杭州", "Index", new { location = "杭州" })
-    @Html.ActionLink("宁波", "Index", new { location = "宁波" })
-    @Html.ActionLink("温州", "Index", new { location = "温州" })
-    @Html.ActionLink("绍兴", "Index", new { location = "绍兴" })
-    @Html.ActionLink("湖州", "Index", new { location = "湖州" })
-    @Html.ActionLink("嘉兴", "Index", new { location = "嘉兴" })
-    @Html.ActionLink("金华", "Index", new { location = "金华" })
-    @Html.ActionLink("衢州", "Index", new { location = "衢州" })
-    @Html.ActionLink("台州", "Index", new { location = "台州" })
-    @Html.ActionLink("丽水", "Index", new { location = "丽水" })
-    @Html.ActionLink("舟山", "Index", new { location = "舟山" })
-</p>
+    <br />
+    <div class="btn-group btn-group-lg">
+        <button type="button" class="btn btn-default">@Html.ActionLink("杭州", "Index", new { location = "杭州" })</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("宁波", "Index", new { location = "宁波" })</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("温州", "Index", new { location = "温州" })</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("绍兴", "Index", new { location = "绍兴" })</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("湖州", "Index", new { location = "湖州" })</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("嘉兴", "Index", new { location = "嘉兴" })</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("金华", "Index", new { location = "金华" })</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("衢州", "Index", new { location = "衢州" })</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("台州", "Index", new { location = "台州" })</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("丽水", "Index", new { location = "丽水" })</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("舟山", "Index", new { location = "舟山" })</button>
+    </div>
+<h2>@ViewBag.Title</h2>
 <table class="table">
     <tr>
         <th>
@@ -34,23 +28,35 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dynasty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Poet)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Details", new { id = item.Id })">@Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dynasty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Poet)
+            </td>
+            <td>
+                @{
+                    if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("编辑|", "Edit", new { id = item.Id })
+                        @Html.ActionLink("删除", "Delete", new { id = item.Id })
+                    }
+                }
+            </td>
+        </tr>
+                    }
 </table>
+@{
+    if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin"))
+    {
+        <p>
+            <button type="button" class="btn">@Html.ActionLink("添加", "Create")</button>
+</p>
+    }
+}
